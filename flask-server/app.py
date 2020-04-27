@@ -15,3 +15,7 @@ app = Flask(__name__, static_folder="../react-app/build/static", template_folder
 def serve():
     # send_from_directory(app.static_folder, 'index.html')
     return render_template('index.html')
+
+@app.route("/manifest.json")
+def manifest():
+    return send_from_directory('../react-app/build', 'manifest.json')
