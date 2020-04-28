@@ -1,0 +1,45 @@
+html, body {
+  width: 100%;
+  height: 100%; 
+}
+
+.menuColumn {
+  float: left;
+  width: 25%;
+  padding: 5%;
+  height: 100%;
+}
+
+.pages {
+  display: flex;
+  flex-flow: column;
+  font-weight: bold;
+}
+
+.contactInfo {
+  display: flex;
+  font-size: 80%;
+  flex-flow: column;
+}
+
+
+.link:link {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+.link:visited {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+.link:hover {
+  color: black;
+  background-color: transparent;
+  text-decoration: underline;
+}
+.link:active {
+  color: black;
+  background-color: transparent;
+  text-decoration: underline;
+}
