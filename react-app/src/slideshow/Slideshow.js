@@ -11,9 +11,17 @@ function Slideshow() {
 }
 
 function Image(props) {
+
+    function nextPhoto() {
+        alert("clicked!");  
+        fetch('/api/count')
+            .then(res => res.json())
+            .then(result => alert(result));  
+    }
+
     const filename = "./" + props.name;
     return (
-        <img class="responsive" src={pic}></img>
+        <img class="responsive" onClick={nextPhoto.bind(this)} src={pic}></img>
     );
 }
 
