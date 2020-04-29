@@ -1,0 +1,9 @@
+.slideshow{
+    padding: 5%;
+    /* outline-style: solid; */
+}
+
+.responsive {
+    width: 100%;
+    height: auto;
+  }

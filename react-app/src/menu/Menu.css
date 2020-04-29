@@ -1,0 +1,48 @@
+/* CSS for everything contained within Menu (pages and contact info) */
+.menuColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  
+  /* outline-style: solid; */
+}
+
+.pages {
+  display: flex;
+  flex-flow: column;
+  font-weight: bold;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  /* outline-style: dotted; */
+}
+
+.contactInfo {
+  display: flex;
+  font-size: 80%;
+  flex-flow: column;
+  align-items: left;
+  justify-content: left;
+  /* outline-style: dotted; */
+}
+
+
+.link:link {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+.link:visited {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+.link:hover {
+  color: black;
+  background-color: transparent;
+  text-decoration: underline;
+}
+.link:active {
+  color: black;
+  background-color: transparent;
+  text-decoration: underline;
+}
