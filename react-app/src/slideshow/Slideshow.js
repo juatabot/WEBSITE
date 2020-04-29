@@ -1,11 +1,12 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import './Slideshow.css';
 import pic from './DSC00533.jpg'
 
 function Slideshow() {
     return (
         <div class="slideshow-image">
-            <Image name="DSC00533.jpg"></Image>
+            <Image id='image' name="DSC00533.jpg"></Image>
         </div>
     );
 }
@@ -13,10 +14,12 @@ function Slideshow() {
 function Image(props) {
 
     function nextPhoto() {
-        alert("clicked!");  
-        fetch('/api/count')
-            .then(res => res.json())
-            .then(result => alert(result));  
+        alert("clicked!");
+        fetch('/api/next')
+            .then(res => res.blob())
+            .then(img => {
+                // ????
+            });
     }
 
     const filename = "./" + props.name;
@@ -25,5 +28,6 @@ function Image(props) {
     );
 }
 
+// https://stackoverflow.com/questions/52979155/displaying-images-from-fetch-api-call-node-react
 
 export default Slideshow;

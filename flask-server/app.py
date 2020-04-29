@@ -6,7 +6,7 @@
 # app.register_blueprint(index)
 
 import os
-from flask import Flask, send_from_directory, render_template
+from flask import Flask, send_from_directory, render_template, jsonify, send_file
 
 app = Flask(__name__, static_folder="../react-app/build/static", template_folder="../react-app/build")
 
@@ -19,3 +19,8 @@ def serve():
 @app.route("/manifest.json")
 def manifest():
     return send_from_directory('../react-app/build', 'manifest.json')
+
+
+@app.route("/api/next")
+def get_next():
+    return send_file('./slideshow/DSC09653.jpg', mimetype='image/gif')
