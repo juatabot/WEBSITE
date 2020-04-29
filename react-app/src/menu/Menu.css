@@ -1,10 +1,10 @@
 /* CSS for everything contained within Menu (pages and contact info) */
 .menuColumn {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: flex-start;
   
-  /* outline-style: solid; */
+  outline-style: solid; */
 }
 
 .pages {
@@ -18,9 +18,10 @@
 
 .contactInfo {
   display: flex;
-  font-size: 80%;
+  font-size: 75%;
   flex-flow: column;
   align-items: left;
+  padding-top: 15%;
   justify-content: left;
   /* outline-style: dotted; */
 }

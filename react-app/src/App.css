@@ -1,34 +1,36 @@
 
-/* CSS for everything contained within App (menu and slideshow) */
+/* CSS for everything contained within App (menu and slideshow-container) */
 
 
 .app {
     display: flex;
     height: 100%;
     width: 100%;
-    background-color: yellow;
-    outline-style: dotted;
+    /* background-color: yellow; */
+    /* outline-style: dotted; */
 }
 
 .menu {
     padding: 5%;
     height: 100%;
-    width: 25%;
+    width: 20%;
     flex-grow: 0;
-    background-color: red;
+    /* background-color: red; */
 }
 
-.slideshow{
-    height: 100;
-    width: 70%;
-    flex-grow: 1000;
+.slideshow-container{
+    padding-top: 5%;
+    padding-right: 15%;
+    width: 50%;
+    flex-grow: 1;
     display:inline-block;
-    background-color:green;
+    /* background-color:green; */
 }
 
 
 /* Wrap under on mobile or window resize */
 @media screen and (max-width: 800px) {
     .app {flex-wrap: wrap;}
-    .slideshow {flex-basis: 100%;}
+    .slideshow-container
+ {flex-basis: 100%;}
 }

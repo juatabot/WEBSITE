@@ -4,7 +4,7 @@ import pic from './DSC00533.jpg'
 
 function Slideshow() {
     return (
-        <div class="slideshow">
+        <div class="slideshow-image">
             <Image name="DSC00533.jpg"></Image>
         </div>
     );

@@ -7,7 +7,7 @@ function App() {
     return (
         <div class="app">
             <div class='menu'> {Menu()}</div>
-            <div class='slideshow'> {Slideshow()}</div>
+            <div class='slideshow-container'> {Slideshow()}</div>
         </div>
     );  
 }
