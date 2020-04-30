@@ -1,7 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './Slideshow.css';
-import pic from './DSC00533.jpg'
 
 function Slideshow() {
     return (
@@ -11,23 +9,35 @@ function Slideshow() {
     );
 }
 
-function Image(props) {
-
-    function nextPhoto() {
-        alert("clicked!");
-        fetch('/api/next')
-            .then(res => res.blob())
-            .then(img => {
-                // ????
-            });
+class Image extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { src: "./DSC00533.jpg" };
     }
 
-    const filename = "./" + props.name;
-    return (
-        <img class="responsive" onClick={nextPhoto.bind(this)} src={pic}></img>
-    );
-}
+    nextPhoto() {
+        alert("clicked!");
 
-// https://stackoverflow.com/questions/52979155/displaying-images-from-fetch-api-call-node-react
+        var outside;
+
+        fetch('/api/next')
+            .then(response => response.blob())
+            .then(images => {
+                // Create a local URL for that image and print it 
+                console.log(images)
+                outside = URL.createObjectURL(images)
+                console.log(outside)
+                this.setState({ src: outside });
+                console.log(this.state);
+            })
+    }
+    
+    render() {
+        return (
+            <img class="responsive" onClick={this.nextPhoto.bind(this)} src={this.state.src}></img>
+        );
+
+    }
+}
 
 export default Slideshow;
