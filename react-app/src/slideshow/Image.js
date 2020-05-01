@@ -8,13 +8,14 @@ class Image extends React.Component {
     }
 
     componentDidMount() {
-        // get first image api, send cookie
-        this.getImageURL('/api/first-image').then(newurl => {
+        console.log("componentDidMount")
+        this.getImageURL('/api/slideshow/first-image').then(newurl => {
             this.setState({ src: newurl })
         });
     }
 
     getImageURL(url) {
+        console.log("getImageURL")
         return fetch(url)
             .then(response => response.blob())
             .then(images => {
@@ -23,15 +24,16 @@ class Image extends React.Component {
     }
 
     nextPhoto() {
-        this.getImageURL('/api/next').then(newurl => {
+        
+        this.getImageURL('/api/slideshow/next').then(newurl => {
             this.setState({ src: newurl })
         });
+        console.log("nextPhoto")
     }
 
     render() {
         return (
-            <img class="responsive" onClick={this.nextPhoto.bind(this)} src={this.state.src}></img>
+            <img class="responsive" onClick={() => this.nextPhoto()} src={this.state.src}></img>
         );
-
     }
 } export default Image;
