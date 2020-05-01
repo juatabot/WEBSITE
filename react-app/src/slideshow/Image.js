@@ -4,22 +4,26 @@ import './Image.css';
 class Image extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { src: "./DSC00533.jpg" };
+        this.state = { src: null };
+    }
+
+    componentDidMount() {
+        // get first image api, send cookie
+        this.getImageURL('/api/first-image').then(newurl => {
+            this.setState({ src: newurl })
+        });
     }
 
     getImageURL(url) {
-        return fetch('/api/next')
+        return fetch(url)
             .then(response => response.blob())
             .then(images => {
-                // Create a local URL for that image and print it 
-                console.log(images)
                 return URL.createObjectURL(images)
             })
     }
 
     nextPhoto() {
         this.getImageURL('/api/next').then(newurl => {
-            console.log(newurl);
             this.setState({ src: newurl })
         });
     }

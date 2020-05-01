@@ -3,9 +3,9 @@ from flask import Blueprint, send_file
 slideshow = Blueprint('slideshow', __name__)
 
 # Return initial image, TODO - add cookie initialization
-@slideshow.route('/first-image')
+@slideshow.route('/api/first-image')
 def get_image():
-    return send_file('./slideshow/DSC00533.jpg', mimetype='image/gif')
+    return send_file('./slideshow/DSC09558.jpg', mimetype='image/gif')
 
 
 # Return next photo not yet viewed
