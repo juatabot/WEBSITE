@@ -12,13 +12,13 @@ function sendData() {
     })
 }
 
-function Slideshow() {
-    return (
-        <div class="slideshow-image">
-            <Image id='image'></Image>
-            <button type="button" onClick={() => sendData()}>send data</button>;
-        </div>
-    );
-}
-
-export default Slideshow;
+class Slideshow extends React.Component {
+    render() {
+        return (
+            <div class="slideshow-image">
+                <Image id='image'> { new Image()} </Image>
+                <button type="button" onClick={() => sendData()}>send data</button>;
+            </div>
+        );
+    }
+} export default Slideshow;

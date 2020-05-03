@@ -7,9 +7,9 @@ function App() {
     return (
         <div class="app">
             <div class='menu'> {Menu()}</div>
-            <div class='slideshow-container'> {Slideshow()}</div>
+            <Slideshow class='slideshow-container'> {new Slideshow()}</Slideshow>
         </div>
-    );  
+    );
 }
 
 export default App;

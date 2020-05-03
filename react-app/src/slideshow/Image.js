@@ -43,7 +43,6 @@ class Image extends React.Component {
         return (
             <div>
                 <img class="responsive" onClick={() => this.nextPhoto()} src={this.state.src}></img>
-                {/* <button type="button" onClick={() => this.sendData()}>send data</button> */}
             </div>
 
         );
