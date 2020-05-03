@@ -9,13 +9,23 @@ class Image extends React.Component {
 
     componentDidMount() {
         console.log("componentDidMount")
+        // this.sendData();
         this.getImageURL('/api/slideshow/first-image').then(newurl => {
             this.setState({ src: newurl })
         });
     }
 
+    sendData() {
+        const width = document.getElementById('image').clientWidth;
+        const height = document.getElementById('image').clientHeight;
+        const data = { 'width': width, 'height': height };
+        fetch('/api/get-resolution', {
+            method: 'POST',
+            body: JSON.stringify(data),
+        })
+    }
+
     getImageURL(url) {
-        console.log("getImageURL")
         return fetch(url)
             .then(response => response.blob())
             .then(images => {
@@ -24,16 +34,18 @@ class Image extends React.Component {
     }
 
     nextPhoto() {
-        
         this.getImageURL('/api/slideshow/next').then(newurl => {
             this.setState({ src: newurl })
         });
-        console.log("nextPhoto")
     }
 
     render() {
         return (
-            <img class="responsive" onClick={() => this.nextPhoto()} src={this.state.src}></img>
+            <div>
+                <img class="responsive" onClick={() => this.nextPhoto()} src={this.state.src}></img>
+                {/* <button type="button" onClick={() => this.sendData()}>send data</button> */}
+            </div>
+
         );
     }
 } export default Image;

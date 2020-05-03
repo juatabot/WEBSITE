@@ -27,21 +27,20 @@ def setup_cookie():
         resp.set_cookie('pid', str(random.randint(0, len(image_list))))
         return resp
 
+
+@slideshow.route('/api/get-resolution', methods=['GET', 'POST'])
+def get_resolution():
+    ret = request.get_json(force=True)
+    print(ret, file=sys.stderr)
+    resp = make_response("/api/get-resolution")
+    return resp
+
 # Return initial image, TODO - add cookie initialization
 @slideshow.route('/api/slideshow/first-image')
 def get_image():
-    # pid = int(request.cookies.get('pid'))
-    # print(pid, file=sys.stderr)
-    # next_pid = pid + 1
-    # next_photo = image_list[next_pid % (len(image_list) - 1)]
-    # print(next_photo, file=sys.stderr)
-    # .set_cookie('pid', str(next_pid))
-    print("/api/slideshow/first-image", file=sys.stderr)
-    print(random.choice(image_list), file=sys.stderr)
     return send_file(f'./slideshow-images/{random.choice(image_list)}', mimetype='image/gif')
 
 # Return next photo not yet viewed
 @slideshow.route("/api/slideshow/next")
 def get_next():
-    print("/api/slideshow/next", file=sys.stderr)
     return send_file(f'./slideshow-images/{random.choice(image_list)}', mimetype='image/gif')
