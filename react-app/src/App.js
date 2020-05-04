@@ -6,8 +6,10 @@ import './App.css'
 function App() {
     return (
         <div class="app">
-            <div class='menu'> {Menu()}</div>
-            <Slideshow class='slideshow-container'> {new Slideshow()}</Slideshow>
+            <span class='menu'> {Menu()}</span>
+            <span class='slideshow-container'>
+                <Slideshow> {new Slideshow()}</Slideshow>
+            </span>
         </div>
     );
 }

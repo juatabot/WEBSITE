@@ -41,10 +41,7 @@ class Image extends React.Component {
 
     render() {
         return (
-            <div>
                 <img class="responsive" onClick={() => this.nextPhoto()} src={this.state.src}></img>
-            </div>
-
         );
     }
 } export default Image;
