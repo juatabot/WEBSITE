@@ -9,13 +9,13 @@ class Image extends React.Component {
 
     componentDidMount() {
         console.log("componentDidMount")
-        // this.sendData();
+        this.sendResolution();
         this.getImageURL('/api/slideshow/first-image').then(newurl => {
             this.setState({ src: newurl })
-        });
+        }); 
     }
 
-    sendData() {
+    sendResolution() {
         const width = document.getElementById('image').clientWidth;
         const height = document.getElementById('image').clientHeight;
         const data = { 'width': width, 'height': height };
@@ -41,7 +41,7 @@ class Image extends React.Component {
 
     render() {
         return (
-                <img class="responsive" onClick={() => this.nextPhoto()} src={this.state.src}></img>
+                <img id='image' class="responsive" onClick={() => this.nextPhoto()} src={this.state.src}></img>
         );
     }
 } export default Image;
