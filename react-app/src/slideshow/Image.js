@@ -10,11 +10,10 @@ class Image extends React.Component {
 
     componentDidMount() {
         console.log("componentDidMount")
-        this.sendResolution();
+        this.login();
         this.getImageURL('/api/slideshow/first-image').then(newurl => {
             this.setState({ src: newurl })
         });
-        this.login();
     }
 
     login() {
@@ -22,18 +21,18 @@ class Image extends React.Component {
         console.log(uuid);
         fetch('/api/login', {
             method: 'POST',
-            body: JSON.stringify({ 'uuid': uuid }),
-        });
+            body: JSON.stringify({
+                'uuid': uuid,
+                'width': this.getResolution()
+            }),
+        }).then();
     }
 
-    sendResolution() {
+    getResolution() {
         const width = document.getElementById('image').clientWidth;
         const height = document.getElementById('image').clientHeight;
         const data = { 'width': width, 'height': height };
-        fetch('/api/get-resolution', {
-            method: 'POST',
-            body: JSON.stringify(data),
-        });
+        return data;
     }
 
     getImageURL(url) {

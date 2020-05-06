@@ -5,6 +5,7 @@ import sys
 from flask.helpers import make_response, request
 import random
 from PIL import Image
+from flask.json import jsonify
 
 slideshow = Blueprint('slideshow', __name__)
 
@@ -26,12 +27,29 @@ UUIDS = {}
 def login():
     ret = request.get_json(force=True)
     uuid = ret['uuid']
+    width = ret['width']
+
+    # delete this after threaded resizing
+    global USER_RESOLUTION
+    USER_RESOLUTION = width
+
+    random_list = random.sample(image_list, len(image_list))
     cookie = {
-        "resolution": None,
-        "random_image_list": random.shuffle(image_list),
+        "uuid": uuid,
+        "resolution": width,
+        "random_image_list": random_list,
+        "index": 0,
     }
+
+    # don't need this, just read cookie from browser on client side
     UUIDS[uuid] = cookie
-    resp = make_response(f"/api/login/{ret['uuid']} = {cookie}")
+
+    print(type(uuid), file=sys.stderr)
+    print(type(cookie), file=sys.stderr)
+    resp = make_response(f"/api/login for uuid {uuid}")
+    resp.set_cookie(
+        str(jsonify(cookie))
+    )
     return resp
 
 
@@ -61,15 +79,6 @@ def setup_cookie():
         resp = make_response("/api/setup-cookie create")
         resp.set_cookie('pid', str(random.randint(0, len(image_list))))
         return resp
-
-
-@slideshow.route('/api/get-resolution', methods=['GET', 'POST'])
-def get_resolution():
-    ret = request.get_json(force=True)
-    global USER_RESOLUTION
-    USER_RESOLUTION = ret
-    resp = make_response("/api/get-resolution")
-    return resp
 
 
 @slideshow.route('/api/slideshow/first-image')
