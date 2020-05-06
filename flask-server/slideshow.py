@@ -11,8 +11,10 @@ slideshow = Blueprint('slideshow', __name__)
 SLIDESHOW_DIR = './slideshow-images/'
 RESIZED_DIR = './slideshow-images/resized/'
 
+
+# Exclude .gitignore
 image_list = [f for f in listdir(
-    SLIDESHOW_DIR) if isfile(join(SLIDESHOW_DIR, f))]
+    SLIDESHOW_DIR) if isfile(join(SLIDESHOW_DIR, f)) and not f == '.gitignore']
 
 USER_RESOLUTION = None
 
@@ -22,8 +24,13 @@ def resize_image(image, width):
     copy = img.copy()
     copy.thumbnail((width, width))
     copy.save(RESIZED_DIR + image, format="jpeg")
-    print(RESIZED_DIR + image, file=sys.stderr)
     return RESIZED_DIR + image
+
+
+@slideshow.route('/api/images/<file>')
+def get_image(file):
+    print(file, file=sys.stderr)
+    return send_file(resize_image(file, USER_RESOLUTION["width"]), mimetype='image/gif')
 
 
 @slideshow.route('/api/setup-cookie')
@@ -46,13 +53,11 @@ def get_resolution():
     global USER_RESOLUTION
     USER_RESOLUTION = ret
     resp = make_response("/api/get-resolution")
-    print("GOT RESOLUTION")
     return resp
 
 
 @slideshow.route('/api/slideshow/first-image')
-def get_image():
-    print("GETTING FIRST IMAGE")
+def get_first_image():
     return send_file(resize_image(random.choice(image_list), USER_RESOLUTION["width"]), mimetype='image/gif')
 
 # Return next photo not yet viewed
