@@ -1,5 +1,6 @@
 import React from 'react';
 import './Image.css';
+import { v4 as uuidv4 } from 'uuid';
 
 class Image extends React.Component {
     constructor(props) {
@@ -12,7 +13,17 @@ class Image extends React.Component {
         this.sendResolution();
         this.getImageURL('/api/slideshow/first-image').then(newurl => {
             this.setState({ src: newurl })
-        }); 
+        });
+        this.login();
+    }
+
+    login() {
+        const uuid = uuidv4();
+        console.log(uuid);
+        fetch('/api/login', {
+            method: 'POST',
+            body: JSON.stringify({ 'uuid': uuid }),
+        });
     }
 
     sendResolution() {
@@ -22,7 +33,7 @@ class Image extends React.Component {
         fetch('/api/get-resolution', {
             method: 'POST',
             body: JSON.stringify(data),
-        })
+        });
     }
 
     getImageURL(url) {
@@ -41,7 +52,7 @@ class Image extends React.Component {
 
     render() {
         return (
-                <img id='image' class="responsive" onClick={() => this.nextPhoto()} src={this.state.src}></img>
+            <img id='image' class="responsive" onClick={() => this.nextPhoto()} src={this.state.src}></img>
         );
     }
 } export default Image;

@@ -16,7 +16,23 @@ RESIZED_DIR = './slideshow-images/resized/'
 image_list = [f for f in listdir(
     SLIDESHOW_DIR) if isfile(join(SLIDESHOW_DIR, f)) and not f == '.gitignore']
 
+
 USER_RESOLUTION = None
+
+UUIDS = {}
+
+# Initialize user and their randomized slideshow image viewing order
+@slideshow.route('/api/login', methods=['GET', 'POST'])
+def login():
+    ret = request.get_json(force=True)
+    uuid = ret['uuid']
+    cookie = {
+        "resolution": None,
+        "random_image_list": random.shuffle(image_list),
+    }
+    UUIDS[uuid] = cookie
+    resp = make_response(f"/api/login/{ret['uuid']} = {cookie}")
+    return resp
 
 
 def resize_image(image, width):
@@ -60,7 +76,7 @@ def get_resolution():
 def get_first_image():
     return send_file(resize_image(random.choice(image_list), USER_RESOLUTION["width"]), mimetype='image/gif')
 
-# Return next photo not yet viewed
+# TODO - Return next photo not yet viewed
 @slideshow.route("/api/slideshow/next")
 def get_next():
     return send_file(resize_image(random.choice(image_list), USER_RESOLUTION["width"]), mimetype='image/gif')
