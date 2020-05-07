@@ -47,9 +47,8 @@ def login():
     print(type(uuid), file=sys.stderr)
     print(type(cookie), file=sys.stderr)
     resp = make_response(f"/api/login for uuid {uuid}")
-    resp.set_cookie(
-        str(jsonify(cookie))
-    )
+    for key, val in cookie.items():
+        resp.set_cookie(key, str(val))
     return resp
 
 

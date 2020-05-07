@@ -14,6 +14,7 @@ class Image extends React.Component {
         this.getImageURL('/api/slideshow/first-image').then(newurl => {
             this.setState({ src: newurl })
         });
+        console.log(document.cookie)
     }
 
     login() {
