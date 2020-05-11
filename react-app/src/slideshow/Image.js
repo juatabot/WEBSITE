@@ -12,7 +12,6 @@ class Image extends React.Component {
     }
 
     componentDidMount() {
-        console.log("componentDidMount")
         this.login();
         this.getImageURL('/api/slideshow/first-image').then(newurl => {
             this.setState({ src: newurl })
@@ -26,20 +25,24 @@ class Image extends React.Component {
         fields.forEach(entry => {
             var key = entry.split("=")[0];
             var value = entry.split("=")[1];
+
             if (value.includes("/")) {
                 value.split("/").forEach(pic => {
-                    image_list.push(pic);
+                    if (pic) {
+                        image_list.push(pic);
+                    }
                 });
                 value = image_list;
             }
+            else if (! isNaN(value)) {
+                value = Number(value);
+            }
             this.state[key] = value;
-        })
-        console.log(this.state);
+        })        
     }
 
     login() {
         const uuid = uuidv4();
-        console.log(uuid);
         fetch('/api/login', {
             method: 'POST',
             body: JSON.stringify({
@@ -66,9 +69,9 @@ class Image extends React.Component {
 
     nextPhoto() {
         this.setState({ "index": this.state["index"] + 1 });
+        console.log(this.state["index"]);
         var image_list_length = this.state["image_list"].length;
         var next_image = this.state["image_list"][this.state["index"] % image_list_length];
-        console.log(next_image);
         this.getImageURL('/api/images/' + next_image).then(newurl => {
             this.setState({ src: newurl })
         });
