@@ -27,25 +27,29 @@ UUIDS = {}
 def login():
     ret = request.get_json(force=True)
     uuid = ret['uuid']
-    width = ret['width']
+    image_width = ret['resolution']["width"]
+    print(image_width, file=sys.stderr)
 
     # delete this after threaded resizing
     global USER_RESOLUTION
-    USER_RESOLUTION = width
+    USER_RESOLUTION = image_width
 
-    random_list = random.sample(image_list, len(image_list))
+    random_list = ""
+    for i in random.sample(image_list, len(image_list)):
+        random_list += str(i) + "/"
+
+    print(random_list, file=sys.stderr)
+
     cookie = {
         "uuid": uuid,
-        "resolution": width,
-        "random_image_list": random_list,
+        "image_width": image_width,
+        "image_list": random_list,
         "index": 0,
     }
 
     # don't need this, just read cookie from browser on client side
     UUIDS[uuid] = cookie
 
-    print(type(uuid), file=sys.stderr)
-    print(type(cookie), file=sys.stderr)
     resp = make_response(f"/api/login for uuid {uuid}")
     for key, val in cookie.items():
         resp.set_cookie(key, str(val))
@@ -63,7 +67,7 @@ def resize_image(image, width):
 @slideshow.route('/api/images/<file>')
 def get_image(file):
     print(file, file=sys.stderr)
-    return send_file(resize_image(file, USER_RESOLUTION["width"]), mimetype='image/gif')
+    return send_file(resize_image(file, USER_RESOLUTION), mimetype='image/gif')
 
 
 @slideshow.route('/api/setup-cookie')
@@ -80,11 +84,13 @@ def setup_cookie():
         return resp
 
 
+
+# TODO - USER_RESOLUTION isn't defined on the first call to this endpoint
 @slideshow.route('/api/slideshow/first-image')
 def get_first_image():
-    return send_file(resize_image(random.choice(image_list), USER_RESOLUTION["width"]), mimetype='image/gif')
+    return send_file(resize_image(random.choice(image_list), USER_RESOLUTION), mimetype='image/gif')
 
 # TODO - Return next photo not yet viewed
 @slideshow.route("/api/slideshow/next")
 def get_next():
-    return send_file(resize_image(random.choice(image_list), USER_RESOLUTION["width"]), mimetype='image/gif')
+    return send_file(resize_image(random.choice(image_list), USER_RESOLUTION), mimetype='image/gif')

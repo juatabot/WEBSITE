@@ -14,10 +14,15 @@ def serve():
     # send_from_directory(app.static_folder, 'index.html')
     return render_template('index.html')
 
-
 @app.route("/manifest.json")
 def manifest():
     return send_from_directory('../react-app/build', 'manifest.json')
+
+
+# TODO - find out why favicon doesn't show up
+@app.route("/favicon.ico")
+def favicon():
+    return send_from_directory('../react-app/build/', "favicon.ico")
 
 @app.route("/service-worker.js")
 def service_worker():

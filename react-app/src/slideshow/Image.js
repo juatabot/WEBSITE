@@ -2,10 +2,13 @@ import React from 'react';
 import './Image.css';
 import { v4 as uuidv4 } from 'uuid';
 
+
 class Image extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { src: null };
+        this.state = {
+            src: null,
+        };
     }
 
     componentDidMount() {
@@ -14,7 +17,24 @@ class Image extends React.Component {
         this.getImageURL('/api/slideshow/first-image').then(newurl => {
             this.setState({ src: newurl })
         });
-        console.log(document.cookie)
+        this.parseCookie();
+    }
+
+    parseCookie() {
+        var fields = document.cookie.split(";").map(x => x.trim());
+        var image_list = [];
+        fields.forEach(entry => {
+            var key = entry.split("=")[0];
+            var value = entry.split("=")[1];
+            if (value.includes("/")) {
+                value.split("/").forEach(pic => {
+                    image_list.push(pic);
+                });
+                value = image_list;
+            }
+            this.state[key] = value;
+        })
+        console.log(this.state);
     }
 
     login() {
@@ -24,7 +44,7 @@ class Image extends React.Component {
             method: 'POST',
             body: JSON.stringify({
                 'uuid': uuid,
-                'width': this.getResolution()
+                'resolution': this.getResolution()
             }),
         }).then();
     }
