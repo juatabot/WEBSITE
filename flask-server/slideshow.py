@@ -84,8 +84,6 @@ def setup_cookie():
         return resp
 
 
-
-# TODO - USER_RESOLUTION isn't defined on the first call to this endpoint
 @slideshow.route('/api/slideshow/first-image')
 def get_first_image():
     return send_file(resize_image(random.choice(image_list), USER_RESOLUTION), mimetype='image/gif')

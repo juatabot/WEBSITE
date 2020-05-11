@@ -65,7 +65,11 @@ class Image extends React.Component {
     }
 
     nextPhoto() {
-        this.getImageURL('/api/slideshow/next').then(newurl => {
+        this.setState({ "index": this.state["index"] + 1 });
+        var image_list_length = this.state["image_list"].length;
+        var next_image = this.state["image_list"][this.state["index"] % image_list_length];
+        console.log(next_image);
+        this.getImageURL('/api/images/' + next_image).then(newurl => {
             this.setState({ src: newurl })
         });
     }
