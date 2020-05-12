@@ -1,4 +1,4 @@
-/* CSS for everything contained within App (menu and slideshow-container) */
+/* CSS for everything contained within App (menu and slideshow-container)
 
 .app {
     display: flex;
@@ -22,7 +22,6 @@
     flex-grow: 1;
 }
 
-/* Wrap under on mobile or window resize */
 
 @media screen and (max-width: 1200px) {
     .app {
@@ -31,4 +30,4 @@
     .slideshow-container {
         flex-basis: 100%;
     }
-}
+} */

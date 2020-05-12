@@ -1,5 +1,6 @@
 import React from 'react';
 import './Menu.css';
+import { Link } from 'react-router-dom';
 
 const TITLE = <h1>JUATABOT</h1>;
 
@@ -8,8 +9,8 @@ function Menu() {
     <div class="menuColumn">
       {TITLE}
       <div class="pages">
-        <Page link="memories"></Page>
-        <Page link="about"></Page>
+        <Page link="memories" to="/memories"></Page>
+        <Page link="about" too="/about"></Page>
       </div>
       <div class="contactInfo">
         <ContactLink link="instagram.com/juatabot"></ContactLink>
@@ -21,7 +22,7 @@ function Menu() {
 
 function Page(props) {
   return (
-    <a href={props.link} class="link">{props.link}</a>
+    <Link to={props.to} href={props.link} class="link">{props.link}</Link>
   )
 }
 

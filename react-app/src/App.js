@@ -1,16 +1,17 @@
 import React from 'react';
 import Slideshow from './slideshow/Slideshow';
-import Menu from './menu/Menu';
+import Memories from './memories/Memories';
 import './App.css'
+import { Router, Route, BrowserRouter, Switch } from 'react-router-dom';
 
 function App() {
     return (
-        <div class="app">
-            <span class='menu'> {Menu()}</span>
-            <span class='slideshow-container'>
-                <Slideshow> {new Slideshow()}</Slideshow>
-            </span>
-        </div>
+        <BrowserRouter>
+            <Switch>
+                <Route exact path='/' component={Slideshow} />
+                <Route path='/memories' component={Memories} />
+            </Switch>
+        </BrowserRouter>
     );
 }
 

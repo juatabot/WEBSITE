@@ -1,6 +1,6 @@
 /* CSS for everything contained within App (menu and slideshow-container) */
 
-.slideshow {
+.memories {
     display: flex;
     height: 100%;
     width: 100%;
@@ -14,7 +14,7 @@
     flex-grow: 0;
 }
 
-.slideshow-container {
+.memories-container {
     padding-top: 5%;
     padding-left: 5%;
     padding-right: 15%;
@@ -28,7 +28,7 @@
     .app {
         flex-wrap: wrap;
     }
-    .slideshow-container {
+    .memories-container {
         flex-basis: 100%;
     }
 }

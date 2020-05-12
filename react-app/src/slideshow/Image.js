@@ -2,7 +2,6 @@ import React from 'react';
 import './Image.css';
 import { v4 as uuidv4 } from 'uuid';
 
-
 class Image extends React.Component {
     constructor(props) {
         super(props);
@@ -13,6 +12,8 @@ class Image extends React.Component {
 
     componentDidMount() {
         this.login();
+        // bug here where cookie isn't fully initialized. maybe await for login?
+        // or move everything server-side, where the server tells client which pic to get.
         this.parseCookie();
         var next_image = this.state["image_list"][this.state["index"]];
         this.getImageURL('/api/images/' + next_image).then(newurl => {
@@ -26,7 +27,7 @@ class Image extends React.Component {
         fields.forEach(entry => {
             var key = entry.split("=")[0];
             var value = entry.split("=")[1];
-
+            console.log(key + ":" + value);
             if (value.includes("/")) {
                 value.split("/").forEach(pic => {
                     if (pic) {
