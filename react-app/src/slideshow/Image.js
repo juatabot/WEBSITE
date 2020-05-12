@@ -13,10 +13,11 @@ class Image extends React.Component {
 
     componentDidMount() {
         this.login();
-        this.getImageURL('/api/slideshow/first-image').then(newurl => {
+        this.parseCookie();
+        var next_image = this.state["image_list"][this.state["index"]];
+        this.getImageURL('/api/images/' + next_image).then(newurl => {
             this.setState({ src: newurl })
         });
-        this.parseCookie();
     }
 
     parseCookie() {
@@ -34,11 +35,11 @@ class Image extends React.Component {
                 });
                 value = image_list;
             }
-            else if (! isNaN(value)) {
+            else if (!isNaN(value)) {
                 value = Number(value);
             }
             this.state[key] = value;
-        })        
+        })
     }
 
     login() {
@@ -69,7 +70,6 @@ class Image extends React.Component {
 
     nextPhoto() {
         this.setState({ "index": this.state["index"] + 1 });
-        console.log(this.state["index"]);
         var image_list_length = this.state["image_list"].length;
         var next_image = this.state["image_list"][this.state["index"] % image_list_length];
         this.getImageURL('/api/images/' + next_image).then(newurl => {
