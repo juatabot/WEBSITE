@@ -14,6 +14,8 @@ class Image extends React.Component {
         this.login();
         // bug here where cookie isn't fully initialized. maybe await for login?
         // or move everything server-side, where the server tells client which pic to get.
+
+        // TODO - first click doesn't change anything tho
         this.parseCookie();
         var next_image = this.state["image_list"][this.state["index"]];
         this.getImageURL('/api/images/' + next_image).then(newurl => {

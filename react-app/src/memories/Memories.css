@@ -14,7 +14,9 @@
     flex-grow: 0;
 }
 
-.memories-container {
+.memories-container-grid {
+    display: grid;
+    grid-template-columns: auto auto auto;
     padding-top: 5%;
     padding-left: 5%;
     padding-right: 15%;

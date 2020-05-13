@@ -9,7 +9,7 @@ function App() {
         <BrowserRouter>
             <Switch>
                 <Route exact path='/' component={Slideshow} />
-                <Route path='/memories' component={Memories} />
+                <Route exact path='/memories' component={Memories} />
             </Switch>
         </BrowserRouter>
     );
