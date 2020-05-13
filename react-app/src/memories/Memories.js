@@ -1,35 +1,46 @@
 import React from 'react';
 import './Memories.css';
 import Menu from '../menu/Menu';
+import AlbumCover from './AlbumCover';
 
 class Memories extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            memories: "loading...",
+            albumCovers: "loading...",
         };
     }
 
     componentDidMount() {
-        fetch('/api/memories/list')
+        fetch('/api/albums/list')
             .then(response => response.json())
-            .then(memory_obj => {
-                this.createMemories(memory_obj);
+            .then(albums_obj => {
+                this.createMemories(albums_obj);
             })
     }
 
     // create list of components which will be rendered
-    createMemories(memory_obj) {
-        var memory_list = Object.keys(memory_obj).map(function (key) {
-            return [Number(key), memory_obj[key]];
+    createMemories(albums_obj) {
+        var albums_list = Object.keys(albums_obj).map(function (key) {
+            return {
+                "title": Number(key),
+                "src": albums_obj[key]
+            };
         });
 
-        console.log(memory_list);
+        console.log(albums_list);
 
-        const listItems = memory_list.map((memory) =>
-            <p>{memory}</p>
-        );
-        this.setState({ memories: listItems });
+        albums_list.forEach(album => {
+            console.log(album);
+        })
+
+        // TODO - request album cover image here. Lift get_image and resize to some utils file
+
+        const albumCovers = albums_list.map((album) => {
+            return <AlbumCover title={album["title"]} src={album["src"]}></AlbumCover>
+        });
+
+        this.setState({ albumCovers: albumCovers });
     }
 
     render() {
@@ -37,7 +48,7 @@ class Memories extends React.Component {
             <div class="memories">
                 <span class='menu'> {Menu()}</span>
                 <span class='memories-container-grid'>
-                    {this.state.memories}
+                    {this.state.albumCovers}
                 </span>
             </div>
         );

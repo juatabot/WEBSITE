@@ -25,7 +25,7 @@
 /* Wrap under on mobile or window resize */
 
 @media screen and (max-width: 1200px) {
-    .app {
+    .slideshow {
         flex-wrap: wrap;
     }
     .slideshow-container {

@@ -16,6 +16,6 @@ MEMORIES_DIR = './memories/'
 image_list = [f for f in listdir(
     MEMORIES_DIR) if not f == '.gitignore']
 
-@memories.route('/api/memories/list')
+@memories.route('/api/albums/list')
 def list_memories():
     return jsonify(image_list)
