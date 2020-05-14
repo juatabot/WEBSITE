@@ -9,7 +9,7 @@ from flask.json import jsonify
 
 albums = Blueprint('albums', __name__)
 
-ALBUMS_DIR = 'albums/'
+ALBUMS_DIR = 'media/albums/'
 COVER_FILE = '/cover.jpg'
 
 

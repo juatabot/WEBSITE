@@ -1,4 +1,6 @@
 import React from 'react';
+import './AlbumCover.css';
+import { getImageURL } from '../Utils';
 
 class AlbumCover extends React.Component {
     constructor(props) {
@@ -10,10 +12,9 @@ class AlbumCover extends React.Component {
     }
 
     componentDidMount() {
-        fetch('/api/albums/cover/' + this.state.title)
-            .then(response => response.blob())
-            .then(images => {
-                this.setState({ src: URL.createObjectURL(images) })
+        getImageURL('media,albums,' + this.state.title + ',cover.jpg')
+            .then(url => {
+                this.setState({ src: url })
             })
     }
 
@@ -21,7 +22,7 @@ class AlbumCover extends React.Component {
         return (
             <div>
                 <img class="responsive" src={this.state.src}></img>
-                <p>{this.state.title}</p>
+                <p class="title">{this.state.title}</p>
             </div >
         )
     }

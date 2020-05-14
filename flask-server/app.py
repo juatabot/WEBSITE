@@ -3,12 +3,14 @@ from flask import Flask, send_from_directory, render_template, jsonify, send_fil
 
 from slideshow import slideshow
 from albums import albums
+from utils import utils
 
 app = Flask(__name__, static_folder="../react-app/build/static",
             template_folder="../react-app/build")
 
 app.register_blueprint(slideshow)
 app.register_blueprint(albums)
+app.register_blueprint(utils)
 
 
 @app.route('/', defaults={'path': ''})

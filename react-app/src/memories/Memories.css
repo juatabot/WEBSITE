@@ -22,15 +22,16 @@
     padding-right: 15%;
     width: 50%;
     flex-grow: 1;
+    column-gap: 2%;
 }
 
 /* Wrap under on mobile or window resize */
 
 @media screen and (max-width: 1200px) {
-    .app {
+    .memories {
         flex-wrap: wrap;
     }
-    .memories-container {
+    .memories-container-grid {
         flex-basis: 100%;
     }
 }

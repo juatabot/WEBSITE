@@ -2,6 +2,7 @@ import React from 'react';
 import './Memories.css';
 import Menu from '../menu/Menu';
 import AlbumCover from './AlbumCover';
+import { getImageURL } from '../Utils';
 
 class Memories extends React.Component {
     constructor(props) {

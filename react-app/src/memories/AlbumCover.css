@@ -3,3 +3,8 @@
     height: auto;
     cursor: col-resize;
 }
+
+.title {
+    font-size: 75%;
+    text-decoration: underline;
+}

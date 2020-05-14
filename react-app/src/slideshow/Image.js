@@ -1,6 +1,7 @@
 import React from 'react';
 import './Image.css';
 import { v4 as uuidv4 } from 'uuid';
+import { getImageURL } from '../Utils';
 
 class Image extends React.Component {
     constructor(props) {
@@ -18,8 +19,9 @@ class Image extends React.Component {
         // TODO - first click doesn't change anything tho
         this.parseCookie();
         var next_image = this.state["image_list"][this.state["index"]];
-        this.getImageURL('/api/images/' + next_image).then(newurl => {
+        getImageURL('media,slideshow-images,' + next_image).then(newurl => {
             this.setState({ src: newurl })
+            console.log("yes");
         });
     }
 
@@ -62,19 +64,11 @@ class Image extends React.Component {
         return data;
     }
 
-    getImageURL(url) {
-        return fetch(url)
-            .then(response => response.blob())
-            .then(images => {
-                return URL.createObjectURL(images)
-            })
-    }
-
     nextPhoto() {
         this.setState({ "index": this.state["index"] + 1 });
         var image_list_length = this.state["image_list"].length;
         var next_image = this.state["image_list"][this.state["index"] % image_list_length];
-        this.getImageURL('/api/images/' + next_image).then(newurl => {
+        getImageURL('media,slideshow-images,' + next_image).then(newurl => {
             this.setState({ src: newurl })
         });
     }
