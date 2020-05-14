@@ -2,7 +2,7 @@ import React from 'react';
 import './Menu.css';
 import { Link } from 'react-router-dom';
 
-const TITLE = <h1>JUATABOT</h1>;
+const TITLE = <Link class="link" to='/'><h1>JUATABOT</h1></Link>;
 
 function Menu() {
   return (
@@ -10,7 +10,7 @@ function Menu() {
       {TITLE}
       <div class="pages">
         <Page link="memories" to="/memories"></Page>
-        <Page link="about" too="/about"></Page>
+        <Page link="about" to="/about"></Page>
       </div>
       <div class="contactInfo">
         <ContactLink link="instagram.com/juatabot"></ContactLink>
