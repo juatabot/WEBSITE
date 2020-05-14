@@ -22,13 +22,8 @@ class Memories extends React.Component {
     // create list of components which will be rendered
     createMemories(albums_obj) {
         var albums_list = Object.keys(albums_obj).map(function (key) {
-            return {
-                "title": Number(key),
-                "src": albums_obj[key]
-            };
+            return albums_obj[key];
         });
-
-        console.log(albums_list);
 
         albums_list.forEach(album => {
             console.log(album);
@@ -37,7 +32,7 @@ class Memories extends React.Component {
         // TODO - request album cover image here. Lift get_image and resize to some utils file
 
         const albumCovers = albums_list.map((album) => {
-            return <AlbumCover title={album["title"]} src={album["src"]}></AlbumCover>
+            return <AlbumCover title={album}></AlbumCover>
         });
 
         this.setState({ albumCovers: albumCovers });

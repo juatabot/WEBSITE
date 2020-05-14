@@ -2,13 +2,13 @@ import os
 from flask import Flask, send_from_directory, render_template, jsonify, send_file, Blueprint
 
 from slideshow import slideshow
-from memories import memories
+from albums import albums
 
 app = Flask(__name__, static_folder="../react-app/build/static",
             template_folder="../react-app/build")
 
 app.register_blueprint(slideshow)
-app.register_blueprint(memories)
+app.register_blueprint(albums)
 
 
 @app.route('/', defaults={'path': ''})

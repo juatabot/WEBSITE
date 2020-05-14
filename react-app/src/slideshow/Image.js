@@ -29,7 +29,6 @@ class Image extends React.Component {
         fields.forEach(entry => {
             var key = entry.split("=")[0];
             var value = entry.split("=")[1];
-            console.log(key + ":" + value);
             if (value.includes("/")) {
                 value.split("/").forEach(pic => {
                     if (pic) {
