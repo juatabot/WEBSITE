@@ -26,10 +26,6 @@ class Memories extends React.Component {
             return albums_obj[key];
         });
 
-        albums_list.forEach(album => {
-            console.log(album);
-        })
-
         // TODO - request album cover image here. Lift get_image and resize to some utils file
 
         const albumCovers = albums_list.map((album) => {

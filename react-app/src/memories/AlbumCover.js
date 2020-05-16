@@ -22,7 +22,6 @@ class AlbumCover extends React.Component {
 
     render() {
         var link_url = '/memories/' + this.state.title.replace(" ", "-");
-        console.log(link_url);
         return (
             <div>
                 <Link to={link_url} class="link">
@@ -31,8 +30,6 @@ class AlbumCover extends React.Component {
                 <p class="title">{this.state.title}</p>
             </div >
         )
-
-        // TODO - https://learnwithparam.com/blog/dynamic-pages-in-react-router/
     }
 }
 export default AlbumCover;

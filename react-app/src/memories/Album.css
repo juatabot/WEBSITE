@@ -1,0 +1,37 @@
+/* CSS for everything contained within App (menu and slideshow-container) */
+
+.album {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.menu {
+    padding: 5%;
+    height: 100%;
+    width: 25%;
+    width: 20%;
+    flex-grow: 0;
+}
+
+.album-images {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding-top: 5%;
+    padding-left: 5%;
+    padding-right: 15%;
+    width: 50%;
+    flex-grow: 1;
+    column-gap: 2%;
+}
+
+/* Wrap under on mobile or window resize */
+
+@media screen and (max-width: 1200px) {
+    .album {
+        flex-wrap: wrap;
+    }
+    .album-images {
+        flex-basis: 100%;
+    }
+}

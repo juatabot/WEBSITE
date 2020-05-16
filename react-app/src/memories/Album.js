@@ -1,5 +1,7 @@
 import React from 'react';
 import './Album.css';
+import Menu from '../menu/Menu';
+
 
 class Album extends React.Component {
     constructor(props) {
@@ -9,7 +11,10 @@ class Album extends React.Component {
 
     render() {
         return (
-            <div>{this.state.match.params.album} album goes here</div>
+            <div class="album">
+                <span class='menu'> {Menu()}</span>
+                <div class="album-images">{this.state.match.params.album} album goes here</div>
+            </div>
         )
     }
 }
