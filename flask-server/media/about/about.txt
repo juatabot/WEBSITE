@@ -1,9 +1,0 @@
-cs student having fun in boston/seattle, and wherever my adventures take me.
-
-passionate adventurer and kid at heart. 
-
-working on:
-    
-
-personal website built in react, served with flask.
-

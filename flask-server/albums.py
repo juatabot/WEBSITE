@@ -10,8 +10,6 @@ from flask.json import jsonify
 albums = Blueprint('albums', __name__)
 
 ALBUMS_DIR = 'media/albums/'
-COVER_FILE = '/cover.jpg'
-
 
 # Exclude .gitignore
 album_list = [f for f in listdir(
@@ -27,4 +25,9 @@ def list_albums():
 
 @albums.route('/api/albums/cover/<album>')
 def get_cover(album):
-    return send_file(ALBUMS_DIR + album + COVER_FILE, mimetype='image/gif')
+    return send_file(ALBUMS_DIR + album + album + ".jpg", mimetype='image/gif')
+
+
+@albums.route('/api/albums/json/<album>')
+def get_json(album):
+    return send_file(ALBUMS_DIR + album + f"/{album}.json", mimetype='application/json')

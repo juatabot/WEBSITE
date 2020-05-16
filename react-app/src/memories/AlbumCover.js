@@ -14,20 +14,21 @@ class AlbumCover extends React.Component {
     }
 
     componentDidMount() {
-        getImageURL('media,albums,' + this.state.title + ',cover.jpg')
+        var cover_url = 'media,albums,' + this.state.title + ',' + this.state.title + '.jpg';
+        getImageURL(cover_url)
             .then(url => {
                 this.setState({ src: url })
             })
     }
 
     render() {
-        var link_url = '/memories/' + this.state.title.replace(" ", "-");
+        var link_url = '/memories/' + this.state.title;
         return (
             <div>
                 <Link to={link_url} class="link">
                     <img class="responsive" src={this.state.src}></img>
                 </Link>
-                <p class="title">{this.state.title}</p>
+                <p class="title">{this.state.title.replace("-", " ")}</p>
             </div >
         )
     }

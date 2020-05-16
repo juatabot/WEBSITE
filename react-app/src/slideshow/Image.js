@@ -21,7 +21,6 @@ class Image extends React.Component {
         var next_image = this.state["image_list"][this.state["index"]];
         getImageURL('media,slideshow-images,' + next_image).then(newurl => {
             this.setState({ src: newurl })
-            console.log("yes");
         });
     }
 
