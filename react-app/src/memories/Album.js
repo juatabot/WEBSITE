@@ -41,10 +41,14 @@ class Album extends React.Component {
     }
 
     render() {
+        var title = this.state.title.replace("-", " ");
         return (
             <div class="album">
                 <span class='menu'> {Menu()}</span>
-                <div class="album-images">{this.state.contents}</div>
+                <div class="album-images">
+                    <h3>{title}</h3>
+                    {this.state.contents}
+                </div>
             </div>
         )
     }
