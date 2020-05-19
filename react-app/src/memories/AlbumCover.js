@@ -14,8 +14,8 @@ class AlbumCover extends React.Component {
     }
 
     componentDidMount() {
-        var cover_url = 'media,albums,' + this.state.title + ',' + this.state.title + '.jpg';
-        getImageURL(cover_url)
+        var url = 'media,albums,' + this.state.title + ',' + this.state.title + '.jpg';
+        getImageURL(url)
             .then(url => {
                 this.setState({ src: url })
             })

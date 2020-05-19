@@ -4,7 +4,6 @@ from flask import Blueprint, send_file, Response
 import sys
 from flask.helpers import make_response, request
 import random
-from PIL import Image
 from flask.json import jsonify
 
 slideshow = Blueprint('slideshow', __name__)
@@ -39,23 +38,3 @@ def login():
     for key, val in cookie.items():
         resp.set_cookie(key, str(val))
     return resp
-
-
-def resize_image(image, width):
-    img = Image.open(SLIDESHOW_DIR + image)
-    copy = img.copy()
-    copy.thumbnail((width, width))
-    copy.save(RESIZED_DIR + image, format="jpeg")
-    return RESIZED_DIR + image
-
-
-@slideshow.route('/api/images/<file>')
-def get_image(file):
-    image_width = int(request.cookies.get('image_width'))
-    return send_file(resize_image(file, image_width), mimetype='image/gif')
-
-
-@slideshow.route('/api/slideshow/first-image')
-def get_first_image():
-    image_width = int(request.cookies.get('image_width'))
-    return send_file(resize_image(random.choice(image_list), image_width), mimetype='image/gif')
