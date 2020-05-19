@@ -12,21 +12,18 @@ class Image extends React.Component {
     }
 
     componentDidMount() {
-        this.login();
-        // bug here where cookie isn't fully initialized. maybe await for login?
-        // or move everything server-side, where the server tells client which pic to get.
-
-        // TODO - first click doesn't change anything tho
-        this.parseCookie();
-        var next_image = this.state["image_list"][this.state["index"]];
-        getImageURL('media,slideshow-images,' + next_image).then(newurl => {
-            this.setState({ src: newurl })
+        this.login(() => {
+            var next_image = this.state.image_list[this.state.index];
+            getImageURL('media,slideshow-images,' + next_image).then(newurl => {
+                this.setState({ src: newurl })
+            });
         });
     }
 
     parseCookie() {
         var fields = document.cookie.split(";").map(x => x.trim());
         var image_list = [];
+        console.log(fields);
         fields.forEach(entry => {
             var key = entry.split("=")[0];
             var value = entry.split("=")[1];
@@ -45,7 +42,7 @@ class Image extends React.Component {
         })
     }
 
-    login() {
+    login(callback) {
         const uuid = uuidv4();
         fetch('/api/login', {
             method: 'POST',
@@ -53,7 +50,10 @@ class Image extends React.Component {
                 'uuid': uuid,
                 'resolution': this.getResolution()
             }),
-        }).then();
+        }).then(() => {
+            this.parseCookie();
+            callback();
+        });
     }
 
     getResolution() {
@@ -64,12 +64,15 @@ class Image extends React.Component {
     }
 
     nextPhoto() {
-        this.setState({ "index": this.state["index"] + 1 });
-        var image_list_length = this.state["image_list"].length;
-        var next_image = this.state["image_list"][this.state["index"] % image_list_length];
-        getImageURL('media,slideshow-images,' + next_image).then(newurl => {
-            this.setState({ src: newurl })
+        var new_index = this.state.index + 1;
+        this.setState({ index: new_index }, () => {
+            var image_list_length = this.state.image_list.length;
+            var next_image = this.state.image_list[this.state.index % image_list_length];
+            getImageURL('media,slideshow-images,' + next_image).then(newurl => {
+                this.setState({ src: newurl })
+            });
         });
+
     }
 
     render() {
