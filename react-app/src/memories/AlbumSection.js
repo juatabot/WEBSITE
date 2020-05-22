@@ -15,16 +15,23 @@ class AlbumSection extends React.Component {
 
     componentDidMount() {
         var src_url = 'media,albums,' + this.state.title + ',' + this.state.src;
-        getImageURL(src_url)
+        getImageURL(src_url, this.getResolution()["width"])
             .then(url => {
                 this.setState({ src: url })
             })
     }
 
+    getResolution() {
+        const width = document.getElementById('image').clientWidth;
+        const height = document.getElementById('image').clientHeight;
+        const data = { 'width': width, 'height': height };
+        return data;
+    }
+
     render() {
         return (
             <div class="album-section">
-                <img class="responsive" src={this.state.src}></img>
+                <img id="image" class="responsive" src={this.state.src}></img>
                 <p class="text">{this.state.text}</p>
             </div >
         )

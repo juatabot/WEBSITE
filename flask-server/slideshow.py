@@ -9,8 +9,6 @@ from flask.json import jsonify
 slideshow = Blueprint('slideshow', __name__)
 
 SLIDESHOW_DIR = './media/slideshow-images/'
-RESIZED_DIR = './media/slideshow-images/resized/'
-
 
 # Exclude .gitignore
 image_list = [f for f in listdir(

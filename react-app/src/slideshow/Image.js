@@ -14,7 +14,7 @@ class Image extends React.Component {
     componentDidMount() {
         this.login(() => {
             var next_image = this.state.image_list[this.state.index];
-            getImageURL('media,slideshow-images,' + next_image).then(newurl => {
+            getImageURL('media,slideshow-images,' + next_image, this.getResolution()["width"]).then(newurl => {
                 this.setState({ src: newurl })
             });
         });
@@ -68,7 +68,7 @@ class Image extends React.Component {
         this.setState({ index: new_index }, () => {
             var image_list_length = this.state.image_list.length;
             var next_image = this.state.image_list[this.state.index % image_list_length];
-            getImageURL('media,slideshow-images,' + next_image).then(newurl => {
+            getImageURL('media,slideshow-images,' + next_image, this.getResolution()["width"]).then(newurl => {
                 this.setState({ src: newurl })
             });
         });

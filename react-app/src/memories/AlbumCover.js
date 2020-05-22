@@ -15,10 +15,17 @@ class AlbumCover extends React.Component {
 
     componentDidMount() {
         var url = 'media,albums,' + this.state.title + ',' + this.state.title + '.jpg';
-        getImageURL(url)
+        getImageURL(url, this.getResolution()["width"])
             .then(url => {
                 this.setState({ src: url })
             })
+    }
+
+    getResolution() {
+        const width = document.getElementById('image').clientWidth;
+        const height = document.getElementById('image').clientHeight;
+        const data = { 'width': width, 'height': height };
+        return data;
     }
 
     render() {
@@ -26,7 +33,7 @@ class AlbumCover extends React.Component {
         return (
             <div>
                 <Link to={link_url} class="link">
-                    <img class="responsive" src={this.state.src}></img>
+                    <img id="image" class="responsive" src={this.state.src}></img>
                 </Link>
                 <p class="title">{this.state.title.replace("-", " ")}</p>
             </div >
