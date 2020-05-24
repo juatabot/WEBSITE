@@ -7,7 +7,8 @@ class Image extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            src: null,
+            // temp name for getting resolution on mount. fix this later!
+            src: "loading...",
         };
     }
 
@@ -57,8 +58,8 @@ class Image extends React.Component {
     }
 
     getResolution() {
-        const width = document.getElementById('image').clientWidth;
-        const height = document.getElementById('image').clientHeight;
+        const width = document.getElementById(this.state.src).clientWidth;
+        const height = document.getElementById(this.state.src).clientHeight;
         const data = { 'width': width, 'height': height };
         return data;
     }
@@ -77,7 +78,7 @@ class Image extends React.Component {
 
     render() {
         return (
-            <img id='image' class="responsive" onClick={() => this.nextPhoto()} src={this.state.src}></img>
+            <img id={this.state.src} class="responsive-slideshow" onClick={() => this.nextPhoto()} src={this.state.src}></img>
         );
     }
 } export default Image;

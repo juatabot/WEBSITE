@@ -22,8 +22,8 @@ class AlbumSection extends React.Component {
     }
 
     getResolution() {
-        const width = document.getElementById('image').clientWidth;
-        const height = document.getElementById('image').clientHeight;
+        const width = document.getElementById(this.state.src).clientWidth;
+        const height = document.getElementById(this.state.src).clientHeight;
         const data = { 'width': width, 'height': height };
         return data;
     }
@@ -31,7 +31,7 @@ class AlbumSection extends React.Component {
     render() {
         return (
             <div class="album-section">
-                <img id="image" class="responsive" src={this.state.src}></img>
+                <img id={this.state.src} class="responsive-picture" src={this.state.src}></img>
                 <p class="text">{this.state.text}</p>
             </div >
         )

@@ -1,6 +1,10 @@
 from flask import Blueprint, send_file, Response, request
 import sys
+from multiprocessing import Manager, Queue, Process, Semaphore, BoundedSemaphore, cpu_count, Value
+import datetime
 from PIL import Image
+import time
+import pdb
 
 utils = Blueprint('utils', __name__)
 
@@ -9,7 +13,8 @@ def resize_image(image_path, width):
     img = Image.open(image_path)
     copy = img.copy()
     copy.thumbnail((width, width))
-    resized_path = image_path.split('.')[0] + '-resized.jpg'
+    split = image_path.rsplit('/', 1)
+    resized_path = split[0] + '/resized/' + split[1]
     copy.save(resized_path, format="jpeg")
     return resized_path
 

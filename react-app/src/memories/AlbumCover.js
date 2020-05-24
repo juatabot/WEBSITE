@@ -9,7 +9,7 @@ class AlbumCover extends React.Component {
         super(props);
         this.state = {
             title: props.title,
-            src: null,
+            src: props.title,
         };
     }
 
@@ -22,8 +22,8 @@ class AlbumCover extends React.Component {
     }
 
     getResolution() {
-        const width = document.getElementById('image').clientWidth;
-        const height = document.getElementById('image').clientHeight;
+        const width = document.getElementById(this.state.src).clientWidth;
+        const height = document.getElementById(this.state.src).clientHeight;
         const data = { 'width': width, 'height': height };
         return data;
     }
@@ -33,7 +33,7 @@ class AlbumCover extends React.Component {
         return (
             <div>
                 <Link to={link_url} class="link">
-                    <img id="image" class="responsive" src={this.state.src}></img>
+                    <img id={this.state.src} class="responsive-cover" src={this.state.src}></img>
                 </Link>
                 <p class="title">{this.state.title.replace("-", " ")}</p>
             </div >

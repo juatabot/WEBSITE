@@ -6,3 +6,8 @@
 .album-section {
     padding-bottom: 5%;
 }
+
+.responsive-picture {
+    width: 100%;
+    height: auto;
+}
