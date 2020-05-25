@@ -5,6 +5,7 @@ import datetime
 from PIL import Image
 import time
 import pdb
+import os
 
 utils = Blueprint('utils', __name__)
 
